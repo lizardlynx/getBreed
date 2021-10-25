@@ -1,5 +1,12 @@
 import { Controller, Get, Param } from '@nestjs/common';
+import { Observable } from 'rxjs';
 import { AppService } from './app.service';
+
+interface Breed {
+  id: string;
+  name: string;
+  dog_friendly: number;
+}
 
 @Controller()
 export class AppController {
@@ -7,11 +14,16 @@ export class AppController {
 
   @Get()
   getInfo(): string {
-    return 'Hello! Insert into the link "/" and breed (or part of the breed word), that you want to search for!'
+    return 'Liza!!!';
   }
 
-  @Get(':breed')
-  async getBreed(@Param('breed') breed: string): Promise<any> {
-    return await this.appService.getBreed(breed);
+  @Get('/getAll')
+  getAll(): Observable<any> {
+    return this.appService.getAll();
   }
+
+  /*@Get(':breed')
+  async getBreed(@Param('breed') breed: string): Promise<Breed[]> {
+    return await this.appService.getBreed(breed);
+  }*/
 }
